@@ -1,13 +1,20 @@
 class Eratos
-  def initialize(num)
-    case num
-    when 30
-      @primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
-    when 120
-      @primes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113]
-    else
-      @primes = []
+  def initialize(max_num)
+    search_list = [*(2..max_num)]
+    print "search_list= "
+    p search_list
+
+    @primes = []
+    while (search_list.first < Math.sqrt(max_num)) do
+      print "@primes= "
+      p @primes << search_list.shift
+      search_list.reject! { |num| (num % @primes.last) == 0 }
+      print "search_list_rejected= "
+      p search_list
     end
+    @primes.concat(search_list)
+    print "@primes finish= "
+    p @primes
   end
   attr_reader :primes
 
